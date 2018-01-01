@@ -12,6 +12,8 @@ namespace BinanceExchange.API.Models.Response
     [JsonConverter(typeof(KlineCandleSticksConverter))]
     public class KlineCandleStickResponse : IResponse
     {
+        /// <summary> 
+        /// Klines are uniquely identified by their open time.</summary>
         [DataMember(Order = 1)]
         public DateTime OpenTime { get; set; }
 
