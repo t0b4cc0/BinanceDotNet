@@ -12,12 +12,28 @@ namespace BinanceExchange.API.Converter
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            throw new NotImplementedException();
+            var candle = value as KlineCandleStickResponse;
+            var jarr = new JArray() {
+                (long)candle.OpenTime.Subtract(Epoch).TotalMilliseconds,
+                candle.Open,
+                candle.High,
+                candle.Low,
+                candle.Close,
+                candle.Volume,
+                (long)candle.CloseTime.Subtract(Epoch).TotalMilliseconds,
+                candle.QuoteAssetVolume,
+                candle.NumberOfTrades,
+                candle.TakerBuyBaseAssetVolume,
+                candle.TakerBuyQuoteAssetVolume,
+            };
+            writer.WriteRaw(jarr.ToString());
+
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             var klineCandlesticks = JArray.Load(reader);
+
             return new KlineCandleStickResponse
             {
                 OpenTime = Epoch.AddMilliseconds((long) klineCandlesticks.ElementAt(0)),
