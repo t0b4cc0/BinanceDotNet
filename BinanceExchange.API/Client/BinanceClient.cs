@@ -149,7 +149,7 @@ namespace BinanceExchange.API.Client
             Guard.AgainstNull(request.Symbol);
             Guard.AgainstDateTimeMin(request.StartTime);
             Guard.AgainstDateTimeMin(request.EndTime);
-            if (request.Limit == 0 || request.Limit > 500) 
+            if (request.Limit <= 0 || request.Limit > 500) 
             {
                 request.Limit = 500;
             }
