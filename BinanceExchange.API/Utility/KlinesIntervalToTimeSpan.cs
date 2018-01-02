@@ -5,9 +5,9 @@ using System.Text;
 
 namespace BinanceExchange.API.Utility
 {
-    public class KlinesIntervalToTimeSpan
+    public class KlineHelper
     {
-        public static TimeSpan Help(KlineInterval interval)
+        public static TimeSpan KlineIntervalToTimespan(KlineInterval interval)
         {
             switch (interval)
             {
