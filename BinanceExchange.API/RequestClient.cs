@@ -238,7 +238,7 @@ namespace BinanceExchange.API
                 {
                     var seconds = (SecondsLimit - Stopwatch.Elapsed.Seconds) * 1000;
                     var sleep = seconds > 0 ? seconds : seconds * -1;
-                    Console.WriteLine($"sleeping {seconds / 1000}");
+                    Console.WriteLine($"sleeping {sleep / 1000}");
                     Thread.Sleep(sleep);
                     _concurrentRequests = 0;
                     Stopwatch.Restart();
