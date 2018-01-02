@@ -16,11 +16,11 @@ namespace BinanceExchange.API
     {
         private static readonly HttpClient HttpClient;
         private static SemaphoreSlim _rateSemaphore;
-        private static int _limit = 10;
+        private static int _limit = 1200;
         /// <summary>
         /// Number of seconds the for the Limit of requests (10 seconds for 10 requests etc)
         /// </summary>
-        public static int SecondsLimit = 10;
+        public static int SecondsLimit = 60;
         private static string _apiKey = string.Empty;
         private static bool RateLimitingEnabled = false;
         private const string APIHeader = "X-MBX-APIKEY";
