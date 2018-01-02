@@ -230,7 +230,7 @@ namespace BinanceExchange.API
         private static async Task<HttpResponseMessage> CreateRequest(Uri endpoint, HttpVerb verb = HttpVerb.GET)
         {
             Task<HttpResponseMessage> task = null;
-
+            Console.WriteLine("http request");
             if (RateLimitingEnabled)
             {
                 await _rateSemaphore.WaitAsync();
@@ -238,6 +238,7 @@ namespace BinanceExchange.API
                 {
                     var seconds = (SecondsLimit - Stopwatch.Elapsed.Seconds) * 1000;
                     var sleep = seconds > 0 ? seconds : seconds * -1;
+                    Console.WriteLine($"sleeping {seconds / 1000}");
                     Thread.Sleep(sleep);
                     _concurrentRequests = 0;
                     Stopwatch.Restart();
