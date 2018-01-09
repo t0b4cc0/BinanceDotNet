@@ -54,6 +54,15 @@ namespace BinanceExchange.API.Utility
             }
         }
 
+        public static bool ContainsDummyKline(IEnumerable<KlineCandleStickResponse> candles)
+        {
+            foreach (var candle in candles)
+                if (IsDummyKline(candle))
+                    return true;
+
+            return false;
+        }
+
         public static TimeSpan KlineIntervalToTimespan(KlineInterval interval)
         {
             switch (interval)
