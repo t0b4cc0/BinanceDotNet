@@ -230,7 +230,6 @@ namespace BinanceExchange.API
         private static async Task<HttpResponseMessage> CreateRequest(Uri endpoint, HttpVerb verb = HttpVerb.GET)
         {
             Task<HttpResponseMessage> task = null;
-            Console.WriteLine("http request");
             if (RateLimitingEnabled)
             {
                 await _rateSemaphore.WaitAsync();
