@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BinanceExchange.API\BinanceExchange.API.csproj" />
+    <ProjectReference Include="..\BinanceExchange.API.STD\BinanceExchange.API.STD.csproj" />
   </ItemGroup>
 
   <ItemGroup>
