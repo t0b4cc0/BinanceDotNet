@@ -6,7 +6,7 @@ using BinanceExchange.API.Caching;
 using BinanceExchange.API.Enums;
 using BinanceExchange.API.Models.Response.Error;
 using Newtonsoft.Json;
-using NLog;
+//using NLog;
 
 namespace BinanceExchange.API
 {
@@ -18,7 +18,7 @@ namespace BinanceExchange.API
         private readonly string _apiKey;
         private readonly string _secretKey;
         private IAPICacheManager _apiCache;
-        private ILogger _logger;
+        //private ILogger _logger;
         private bool _cacheEnabled;
         private TimeSpan _cacheTime;
 
@@ -31,8 +31,8 @@ namespace BinanceExchange.API
                 _apiCache = apiCache;
                 _cacheEnabled = true;
             }
-            _logger = LogManager.GetCurrentClassLogger();
-            _logger.Debug($"API Processor set up. Cache Enabled={_cacheEnabled}");
+            //_logger = LogManager.GetCurrentClassLogger();
+            //_logger.Debug($"API Processor set up. Cache Enabled={_cacheEnabled}");
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace BinanceExchange.API
             {
                 var messageJson = await message.Content.ReadAsStringAsync();
                 var messageObject = JsonConvert.DeserializeObject<T>(messageJson);
-                _logger.Debug($"Successful Message Response={messageJson}");
+                //_logger.Debug($"Successful Message Response={messageJson}");
 
                 if (messageObject == null)
                 {
@@ -66,7 +66,7 @@ namespace BinanceExchange.API
             var errorJson = await message.Content.ReadAsStringAsync();
             var errorObject = JsonConvert.DeserializeObject<BinanceError>(errorJson);
             if (errorObject == null) throw new BinanceException("Unexpected Error whilst handling the response", null);
-            _logger.Error($"Error Message Recevied", errorObject);
+            //_logger.Error($"Error Message Recevied", errorObject);
             throw CreateBinanceException(message.StatusCode, errorObject);
         }
 

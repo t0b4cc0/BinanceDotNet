@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using BinanceExchange.API.Enums;
-using NLog;
+//using NLog;
 
 namespace BinanceExchange.API
 {
@@ -26,7 +26,7 @@ namespace BinanceExchange.API
         private const string APIHeader = "X-MBX-APIKEY";
         private static readonly Stopwatch Stopwatch;
         private static int _concurrentRequests = 0;
-        private static ILogger _logger;
+        //private static ILogger _logger;
         private static readonly object LockObject = new object();
 
         static RequestClient()
@@ -39,7 +39,7 @@ namespace BinanceExchange.API
             HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             _rateSemaphore = new SemaphoreSlim(_limit, _limit);
             Stopwatch = new Stopwatch();
-            _logger = LogManager.GetCurrentClassLogger();
+            //_logger = LogManager.GetCurrentClassLogger();
         }
 
 
@@ -51,7 +51,7 @@ namespace BinanceExchange.API
         {
             _limit = limit;
             _rateSemaphore = new SemaphoreSlim(limit, limit);
-            _logger.Debug($"Request Limit Adjusted to: {limit}");
+            //_logger.Debug($"Request Limit Adjusted to: {limit}");
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace BinanceExchange.API
         {
             var set = enabled ? "enabled" : "disabled";
             RateLimitingEnabled = enabled;
-            _logger.Debug($"Rate Limiting has been {set}");
+            //_logger.Debug($"Rate Limiting has been {set}");
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace BinanceExchange.API
         public static void SetSecondsLimit(int limit)
         {
             SecondsLimit = limit;
-            _logger.Debug($"Rate Limiting seconds limit has been set to {limit}");
+            //_logger.Debug($"Rate Limiting seconds limit has been set to {limit}");
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace BinanceExchange.API
         /// <returns></returns>
         public static async Task<HttpResponseMessage> GetRequest(Uri endpoint)
         {
-            _logger.Debug($"Creating a GET Request to {endpoint.AbsoluteUri}");
+            //_logger.Debug($"Creating a GET Request to {endpoint.AbsoluteUri}");
             return await CreateRequest(endpoint);
         }
 
@@ -116,7 +116,7 @@ namespace BinanceExchange.API
         /// <returns></returns>
         public static async Task<HttpResponseMessage> SignedGetRequest(Uri endpoint, string apiKey, string secretKey, string signatureRawData, long receiveWindow = 5000)
         {
-            _logger.Debug($"Creating a SIGNED GET Request to {endpoint.AbsoluteUri}");
+            //_logger.Debug($"Creating a SIGNED GET Request to {endpoint.AbsoluteUri}");
             var uri = CreateValidUri(endpoint, secretKey, signatureRawData, receiveWindow);
             return await CreateRequest(uri, HttpVerb.GET);
         }
@@ -128,7 +128,7 @@ namespace BinanceExchange.API
         /// <returns></returns>
         public static async Task<HttpResponseMessage> PostRequest(Uri endpoint)
         {
-            _logger.Debug($"Creating a POST Request to {endpoint.AbsoluteUri}");
+            //_logger.Debug($"Creating a POST Request to {endpoint.AbsoluteUri}");
             return await CreateRequest(endpoint, HttpVerb.POST);
         }
 
@@ -139,7 +139,7 @@ namespace BinanceExchange.API
         /// <returns></returns>
         public static async Task<HttpResponseMessage> DeleteRequest(Uri endpoint)
         {
-            _logger.Debug($"Creating a DELETE Request to {endpoint.AbsoluteUri}");
+            //_logger.Debug($"Creating a DELETE Request to {endpoint.AbsoluteUri}");
             return await CreateRequest(endpoint, HttpVerb.DELETE);
         }
 
@@ -150,7 +150,7 @@ namespace BinanceExchange.API
         /// <returns></returns>
         public static async Task<HttpResponseMessage> PutRequest(Uri endpoint)
         {
-            _logger.Debug($"Creating a PUT Request to {endpoint.AbsoluteUri}");
+            //_logger.Debug($"Creating a PUT Request to {endpoint.AbsoluteUri}");
             return await CreateRequest(endpoint, HttpVerb.PUT);
         }
 
@@ -165,7 +165,7 @@ namespace BinanceExchange.API
         /// <returns></returns>
         public static async Task<HttpResponseMessage> SignedPostRequest(Uri endpoint, string apiKey, string secretKey, string signatureRawData, long receiveWindow = 5000)
         {
-            _logger.Debug($"Creating a SIGNED POST Request to {endpoint.AbsoluteUri}");
+            //_logger.Debug($"Creating a SIGNED POST Request to {endpoint.AbsoluteUri}");
             var uri = CreateValidUri(endpoint, secretKey, signatureRawData, receiveWindow);
             return await CreateRequest(uri, HttpVerb.POST);
         }
@@ -181,7 +181,7 @@ namespace BinanceExchange.API
         /// <returns></returns>
         public static async Task<HttpResponseMessage> SignedDeleteRequest(Uri endpoint, string apiKey, string secretKey, string signatureRawData, long receiveWindow = 5000)
         {
-            _logger.Debug($"Creating a SIGNED DELETE Request to {endpoint.AbsoluteUri}");
+            //_logger.Debug($"Creating a SIGNED DELETE Request to {endpoint.AbsoluteUri}");
             var uri = CreateValidUri(endpoint, secretKey, signatureRawData, receiveWindow);
             return await CreateRequest(uri, HttpVerb.DELETE);
         }
@@ -277,9 +277,9 @@ namespace BinanceExchange.API
             return await task;
         }
 
-        public static void SetLogger(ILogger logger)
-        {
-            _logger = logger;
-        }
+        //public static void SetLogger(ILogger logger)
+        //{
+        //    //_logger = logger;
+        //}
     }
 }
